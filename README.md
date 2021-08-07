@@ -4,6 +4,7 @@ Shell scripts to capture stats from Tesla Backup Gateway - Powerwall, Solar, Gri
 ## Parameters
 * **GW** should be the IP address of your Backup Gateway on your local network. You should be able to find this on your router, etc. by looking at DHCP assignments for a device named "teg"
 * **LOGFILE** and **JAR** can be whereever you want to keep your logs and your cookies.txt file (used for storing the authentication token)
+* **LOGDIR** is the directory for multiple logfiles
 * **EMAIL** and **PASSWORD** are whatever you've set those to _on your gateway_. They are **_NOT_** the same as your Tesla (website/app) email/password unless you've made them the same. (You probably shouldn't use the same password.)
 
 ## Running
