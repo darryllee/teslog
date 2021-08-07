@@ -1,15 +1,16 @@
 GW="192.168.2.51"
 API="https://$GW/api"
-LOGFILE="/home/pi/workplace/teslog/all.log"
+LOGDIR="/home/pi/workplace/teslog"
 JAR="/home/pi/workplace/teslog/cookies.txt"
 EMAIL="YOUREMAIL"
 PASSWORD="YOURPASSWORD"
 
-date -Iseconds >> $LOGFILE
 curl -c $JAR -b $JAR -s -k -X POST "$API/login/Basic" -H "Content-Type: application/json" -d '{"username":"customer","password":"$PASSWORD","email":"$EMAIL"}' > /dev/null
-curl -c $JAR -b $JAR -s -k "$API/sitemaster" >> $LOGFILE
-echo >> $LOGFILE
-curl -c $JAR -b $JAR -s -k "$API/system_status/soe" >> $LOGFILE
-echo >> $LOGFILE
-curl -c $JAR -b $JAR -s -k "$API/meters/aggregates" >> $LOGFILE
-echo >> $LOGFILE
+
+for x in sitemaster system_status/soe system/update/status meters/aggregates ;
+do
+LOGFILE=$LOGDIR/`basename $x`.log ;
+date -Iseconds >> $LOGFILE ;
+curl -c $JAR -b $JAR -s -k "$API/$x" >> $LOGFILE ;
+echo >> $LOGFILE ;
+done
